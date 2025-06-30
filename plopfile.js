@@ -1,12 +1,13 @@
 #!/usr/bin/env node
-const path = require('path');
-const { NodePlop } = require('plop');
+
 const inquirer = require('inquirer');
-const fs = require('fs');
+const path = require('path');
+const nodePlop = require('plop');
+const process = require('process');
 
 (async () => {
   const cwd = process.cwd();
-  const plop = NodePlop(path.join(__dirname, 'plopfile-base.js'));
+  const plop = await nodePlop(path.join(__dirname, 'plopfile-base.js'));
   const generator = plop.getGenerator('repository');
 
   const answers = await inquirer.prompt([
@@ -21,8 +22,7 @@ const fs = require('fs');
 
   console.log('\n📁 Arquivos gerados:');
   changes.forEach(change => {
-    const filePath = path.relative(cwd, change.path);
-    console.log(`✔ ${filePath}`);
+    console.log(`✔ ${path.relative(cwd, change.path)}`);
   });
 
   if (failures.length > 0) {
