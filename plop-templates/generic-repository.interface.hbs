@@ -1,0 +1,10 @@
+import { PaginationQueryDto } from "../dto/pagination-query.dto";
+import { PaginatedResult } from "./paginated-result.interface";
+
+export interface GenericRepository<T> {
+  findAll(pagination: PaginationQueryDto): Promise<PaginatedResult<T>>;
+  findOneById(id: string): Promise<T | null>;
+  create(data: Partial<T>): Promise<T>;
+  update(id: string, data: Partial<T>): Promise<T>;
+  softDelete(id: string): Promise<void>;
+}

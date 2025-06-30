@@ -1,0 +1,76 @@
+import {
+  Repository,
+  FindOneOptions,
+  FindOptionsWhere,
+  ObjectLiteral,
+  DataSource,
+} from "typeorm";
+import { Injectable } from "@nestjs/common";
+import { PaginationQueryDto } from "../dto/pagination-query.dto";
+import { PaginatedResult } from "../interfaces/paginated-result.interface";
+import { GenericRepository } from "../interfaces/generic-repository.interface";
+
+@Injectable()
+export class BaseRepository<T> implements GenericRepository<T> {
+  protected repository: Repository<T>;
+
+  constructor(
+    private readonly dataSource: DataSource,
+    private readonly entity: new () => T,
+  ) {
+    this.repository = this.dataSource.getRepository(this.entity);
+  }
+
+  async findAll(
+    paginationQuery: PaginationQueryDto,
+    where?: FindOptionsWhere<T> | FindOptionsWhere<T>[],
+  ): Promise<PaginatedResult<T>> {
+    const {
+      page = 1,
+      limit = 10,
+      sortBy = "createdAt",
+      order = "ASC",
+    } = paginationQuery;
+
+    const [items, total] = await this.repository.findAndCount({
+      where,
+      order: {
+        [sortBy]: order.toUpperCase(),
+      } as ObjectLiteral,
+      skip: (page - 1) * limit,
+      take: limit,
+    });
+
+    return {
+      items,
+      total,
+      page,
+      limit,
+    };
+  }
+
+  findOneById(id: string, options?: FindOneOptions<T>): Promise<T | null> {
+    return this.repository.findOne({
+      where: { id } as FindOptionsWhere<T>,
+      ...options,
+    });
+  }
+
+  async create(data: Partial<T>): Promise<T> {
+    const entity = this.repository.create(data);
+    return this.repository.save(entity);
+  }
+
+  async update(id: string, data: Partial<T>): Promise<T> {
+    await this.repository.update(id, data);
+    return this.findOneById(id) as Promise<T>;
+  }
+
+  async softDelete(id: string): Promise<void> {
+    await this.repository.softDelete(id);
+  }
+
+  getRepo(): Repository<T> {
+    return this.repository;
+  }
+}
