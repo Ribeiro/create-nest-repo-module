@@ -2,7 +2,7 @@
 
 const inquirer = require('inquirer');
 const path = require('path');
-const nodePlop = require('node-plop');
+const nodePlop = require('node-plop').default;
 const process = require('process');
 
 (async () => {
