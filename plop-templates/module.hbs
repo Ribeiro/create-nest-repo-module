@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { {{pascalCase name}}Service } from './{{lowerCase name}}.service';
 import { {{pascalCase name}}Repository } from './{{lowerCase name}}.repository';
 import { {{pascalCase name}} } from './{{lowerCase name}}.entity';
-import { getGenericRepositoryToken } from '../common/tokens/generic-repository.token';
+import { getGenericRepositoryToken } from '../common/interfaces/repository.token';
 
 @Module({
   providers: [
