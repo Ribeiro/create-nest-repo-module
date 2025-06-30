@@ -1,9 +1,12 @@
 const { pascalCase, camelCase, lowerCase } = require('change-case');
+const pluralize = require('pluralize');
 const path = require('path');
 
 module.exports = function (plop) {
   plop.setDefaultInclude({ generators: true });
   plop.setPlopfilePath(process.cwd());
+
+  plop.setHelper('pluralLowerCase', (text) => lowerCase(pluralize.plural(text)));
 
   plop.setGenerator('repository', {
     description: 'Gera módulo, service e repositório com BaseRepository e GenericRepository',
@@ -14,30 +17,30 @@ module.exports = function (plop) {
         message: 'Nome da entidade (ex: user):',
       },
     ],
-    actions: function (data) {
+    actions: function () {
       return [
         // Entidade
         {
           type: 'add',
-          path: 'src/{{lowerCase name}}/{{lowerCase name}}.entity.ts',
+          path: 'src/{{pluralLowerCase name}}/{{lowerCase name}}.entity.ts',
           templateFile: path.join(__dirname, 'plop-templates/entity.hbs'),
         },
         // Repositório específico
         {
           type: 'add',
-          path: 'src/{{lowerCase name}}/{{lowerCase name}}.repository.ts',
+          path: 'src/{{pluralLowerCase name}}/{{lowerCase name}}.repository.ts',
           templateFile: path.join(__dirname, 'plop-templates/repository.hbs'),
         },
         // Service
         {
           type: 'add',
-          path: 'src/{{lowerCase name}}/{{lowerCase name}}.service.ts',
+          path: 'src/{{pluralLowerCase name}}/{{lowerCase name}}.service.ts',
           templateFile: path.join(__dirname, 'plop-templates/service.hbs'),
         },
         // Module
         {
           type: 'add',
-          path: 'src/{{lowerCase name}}/{{lowerCase name}}.module.ts',
+          path: 'src/{{pluralLowerCase name}}/{{lowerCase name}}.module.ts',
           templateFile: path.join(__dirname, 'plop-templates/module.hbs'),
         },
 
