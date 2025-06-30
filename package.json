@@ -1,6 +1,6 @@
 {
   "name": "create-nest-repo-module",
-  "version": "1.0.17",
+  "version": "1.0.18",
   "bin": {
     "create-nest-repo-module": "plopfile.js"
   },
