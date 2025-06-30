@@ -41,6 +41,5 @@ module.exports = function (plop) {
 };
 
 if (require.main === module) {
-  const plop = require('plop').default;
-  plop.run();
+  require('plop/lib/cli')();
 }
