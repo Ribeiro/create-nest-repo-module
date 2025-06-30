@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 const { pascalCase, camelCase } = require('change-case');
+const nodePlop = require('plop');
+const path = require('path');
 
 module.exports = function (plop) {
   plop.setGenerator('repository', {
@@ -37,3 +39,8 @@ module.exports = function (plop) {
     },
   });
 };
+
+if (require.main === module) {
+  const plop = require('plop').default;
+  plop.run();
+}
