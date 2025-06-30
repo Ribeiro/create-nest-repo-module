@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-
 const { pascalCase, camelCase } = require('change-case');
 
 module.exports = function (plop) {
