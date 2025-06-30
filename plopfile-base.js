@@ -10,7 +10,7 @@ module.exports = function (plop) {
         message: 'Nome da entidade (ex: user):',
       },
     ],
-    actions: function (data) {
+    actions: function () {
       return [
         {
           type: 'add',
