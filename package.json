@@ -1,15 +1,19 @@
 {
   "name": "create-nest-repo-module",
   "version": "1.0.0",
-  "description": "CLI para gerar módulo NestJS com BaseRepository e GenericRepository",
-  "main": "plopfile.js",
   "bin": {
     "create-nest-repo-module": "plopfile.js"
   },
-  "keywords": ["nestjs", "repository", "plop", "scaffold"],
-  "license": "MIT",
+  "scripts": {
+    "start": "plop"
+  },
+  "type": "module",
   "dependencies": {
     "change-case": "^4.1.2",
     "plop": "^3.1.1"
-  }
+  },
+  "engines": {
+    "node": ">=14"
+  },
+  "license": "MIT"
 }
