@@ -72,6 +72,12 @@ module.exports = function (plop) {
           templateFile: path.join(__dirname, 'plop-templates/base.repository.hbs'),
           skipIfExists: true,
         },
+        {
+          type: 'add',
+          path: 'src/common/entities/base.entity.ts',
+          templateFile: path.join(__dirname, 'plop-templates/base.entity.hbs'),
+          skipIfExists: true,
+        },
       ];
     },
   });

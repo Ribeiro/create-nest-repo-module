@@ -1,0 +1,41 @@
+import {
+  PrimaryColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
+  DeleteDateColumn,
+  BeforeInsert,
+} from "typeorm";
+import { v7 as uuidv7 } from "uuidv7";
+
+export abstract class BaseEntity {
+  @PrimaryColumn("uuid")
+  id: string;
+
+  @CreateDateColumn({
+    name: "created_at",
+    type: "timestamptz",
+    default: () => "NOW()",
+  })
+  createdAt: Date;
+
+  @UpdateDateColumn({
+    name: "updated_at",
+    type: "timestamptz",
+    default: () => "NOW()",
+  })
+  updatedAt: Date;
+
+  @DeleteDateColumn({
+    name: "deleted_at",
+    type: "timestamptz",
+    nullable: true,
+  })
+  deletedAt?: Date;
+
+  @BeforeInsert()
+  generateId() {
+    if (!this.id) {
+      this.id = uuidv7();
+    }
+  }
+}
