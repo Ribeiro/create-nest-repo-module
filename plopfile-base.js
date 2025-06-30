@@ -1,12 +1,16 @@
-const { pascalCase, camelCase, lowerCase } = require('change-case');
+const { pascalCase, camelCase } = require('change-case');
 const pluralize = require('pluralize');
 const path = require('path');
+
+const lowerCase = (text) => text.toLowerCase();
 
 module.exports = function (plop) {
   plop.setDefaultInclude({ generators: true });
   plop.setPlopfilePath(process.cwd());
 
+  // Helpers para uso nos caminhos e nomes
   plop.setHelper('pluralLowerCase', (text) => lowerCase(pluralize.plural(text)));
+  plop.setHelper('lowerCase', (text) => lowerCase(text));
 
   plop.setGenerator('repository', {
     description: 'Gera módulo, service e repositório com BaseRepository e GenericRepository',
@@ -44,7 +48,7 @@ module.exports = function (plop) {
           templateFile: path.join(__dirname, 'plop-templates/module.hbs'),
         },
 
-        // Adicionais genéricos (somente se não existirem ainda)
+        // Adicionais genéricos
         {
           type: 'add',
           path: 'src/common/dto/pagination-query.dto.ts',
