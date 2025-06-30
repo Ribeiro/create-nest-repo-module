@@ -1,6 +1,6 @@
 {
   "name": "create-nest-repo-module",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "CLI para gerar estrutura de módulo NestJS com BaseRepository e GenericRepository",
   "bin": {
     "create-nest-repo-module": "plopfile.js"
