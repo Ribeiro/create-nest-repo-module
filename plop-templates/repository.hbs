@@ -1,0 +1,14 @@
+import { Injectable } from '@nestjs/common';
+import { DataSource } from 'typeorm';
+import { BaseRepository } from '../common/base.repository';
+import { {{pascalCase name}} } from './{{lowerCase name}}.entity';
+import { GenericRepository } from '../common/interfaces/generic-repository.interface';
+
+@Injectable()
+export class {{pascalCase name}}Repository
+  extends BaseRepository<{{pascalCase name}}>
+  implements GenericRepository<{{pascalCase name}}> {
+  constructor(dataSource: DataSource) {
+    super(dataSource, {{pascalCase name}});
+  }
+}

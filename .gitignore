@@ -1,0 +1,34 @@
+# Node modules
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Logs
+logs
+*.log
+*.log.*
+
+# IDEs
+.vscode/
+.idea/
+
+# System
+.DS_Store
+Thumbs.db
+
+# Output
+dist/
+out/
+
+# Temp
+tmp/
+temp/
+
+# Plop cache (caso use plop-state)
+plopfile.cache.json
+
+# OS-specific
+.env
+*.swp

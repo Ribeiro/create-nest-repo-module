@@ -1,0 +1,18 @@
+import { Module } from '@nestjs/common';
+import { {{pascalCase name}}Service } from './{{lowerCase name}}.service';
+import { {{pascalCase name}}Repository } from './{{lowerCase name}}.repository';
+import { {{pascalCase name}} } from './{{lowerCase name}}.entity';
+import { getGenericRepositoryToken } from '../common/tokens/generic-repository.token';
+
+@Module({
+  providers: [
+    {
+      provide: getGenericRepositoryToken({{pascalCase name}}),
+      useClass: {{pascalCase name}}Repository,
+    },
+    {{pascalCase name}}Repository,
+    {{pascalCase name}}Service,
+  ],
+  exports: [{{pascalCase name}}Service],
+})
+export class {{pascalCase name}}Module {}

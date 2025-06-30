@@ -1,0 +1,33 @@
+import { Injectable, Inject } from '@nestjs/common';
+import { GenericRepository } from '../common/interfaces/generic-repository.interface';
+import { {{pascalCase name}} } from './{{lowerCase name}}.entity';
+import { PaginationQueryDto } from '../common/dto/pagination-query.dto';
+import { getGenericRepositoryToken } from '../common/tokens/generic-repository.token';
+
+@Injectable()
+export class {{pascalCase name}}Service {
+  constructor(
+    @Inject(getGenericRepositoryToken({{pascalCase name}}))
+    private readonly repository: GenericRepository<{{pascalCase name}}>,
+  ) {}
+
+  findAll(query: PaginationQueryDto) {
+    return this.repository.findAll(query);
+  }
+
+  findOneById(id: string) {
+    return this.repository.findOneById(id);
+  }
+
+  create(data: Partial<{{pascalCase name}}>) {
+    return this.repository.create(data);
+  }
+
+  update(id: string, data: Partial<{{pascalCase name}}>) {
+    return this.repository.update(id, data);
+  }
+
+  softDelete(id: string) {
+    return this.repository.softDelete(id);
+  }
+}
